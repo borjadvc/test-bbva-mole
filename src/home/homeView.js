@@ -11,6 +11,10 @@ const loginHeaderIcon = new URL(
 
 const REGULAR_EXPRESSIONS = /^[a-zA-Z0-9]+$/;
 
+const ERROR_EMPTY_FIELD_MESSAGE = 'The name field must not be empty.';
+
+const ERROR_REGEX_MESSAGE = 'Username should only contain letters and numbers.';
+
 export class HomeView extends LitElement {
   static properties = {
     userName: { type: String },
@@ -80,12 +84,12 @@ export class HomeView extends LitElement {
   __handleRegister() {
     const userName = this.shadowRoot.querySelector('input-field').value;
     if (!userName.length) {
-      alert('The name field must not be empty.');
+      alert(ERROR_EMPTY_FIELD_MESSAGE);
       return;
     }
 
     if (!REGULAR_EXPRESSIONS.test(userName)) {
-      alert('Username should only contain letters and numbers.');
+      alert(ERROR_REGEX_MESSAGE);
       return;
     }
 
