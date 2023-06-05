@@ -4,7 +4,7 @@ import { View, Route } from '../constants/views.js';
 let router;
 let location;
 
-const checkPath = ({ pathname }) => Route[pathname] ?? View.Login.id;
+const checkPath = ({ pathname }) => Route[pathname] ?? View.Home.id;
 
 function initRouter() {
   const routeViewEl = this.shadowRoot.querySelector('#router-outlet');
@@ -13,8 +13,8 @@ function initRouter() {
   });
 
   router.setRoutes([
-    { path: View.Login.id, component: View.Login.component },
-    { path: '(.*)', redirect: View.Login.id },
+    { path: View.Home.id, component: View.Home.component },
+    { path: '(.*)', redirect: View.Home.id },
   ]);
 
   location = checkPath({ pathname: window.location.pathname });

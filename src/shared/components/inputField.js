@@ -23,6 +23,7 @@ class InputField extends LitElement {
       font-size: 1rem;
       padding-left: 7px;
       padding-right: 1px;
+      outline: 0;
       border: none;
       border-bottom: 1px solid rgb(63, 63, 63);
     }
@@ -63,6 +64,7 @@ class InputField extends LitElement {
 
     @keyframes outAnimation {
       to {
+        font-size: 0.75em;
         margin-top: -12px;
         margin-left: 7px;
         color: #a2b6d6;

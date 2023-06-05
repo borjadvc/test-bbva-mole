@@ -25,15 +25,11 @@ class ButtonView extends LitElement {
       padding: 0px 15px;
       border-radius: 6px;
     }
-    .button--view {
-      background-color: #85c2f8;
-      color: #000;
-      font-weight: bolder;
-      text-transform: uppercase;
-    }
 
-    .button--view:hover {
-      background-color: #61b1f7;
+    .button--view {
+      background-color: #1262a8;
+      color: #fff;
+      text-transform: uppercase;
     }
   `;
 

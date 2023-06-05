@@ -1,11 +1,11 @@
 const Route = {};
-Route['/login'] = '/login';
+Route['/home'] = '/home';
 
 const View = {
-  Login: {
-    id: Route['/login'],
-    title: 'Login',
-    component: 'login-view',
+  Home: {
+    id: Route['/home'],
+    title: 'Home',
+    component: 'home-view',
   },
 };
 

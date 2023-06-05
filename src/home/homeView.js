@@ -1,14 +1,17 @@
 import { html, css, LitElement } from 'lit';
-import { AppRouter } from '../../shared/helpers/router.js';
-import { View } from '../../shared/constants/views.js';
-import '../../shared/components/buttonView.js';
-import '../../shared/components/inputField.js';
+import { AppRouter } from '../shared/helpers/router.js';
+import { View } from '../shared/constants/views.js';
+import '../shared/components/buttonView.js';
+import '../shared/components/inputField.js';
 
 const loginHeaderIcon = new URL(
   '../../../assets/icons/computer-mouse-solid.svg',
   import.meta.url
 ).href;
-export class LoginView extends LitElement {
+
+const REGULAR_EXPRESSIONS = /^[a-zA-Z0-9]+$/;
+
+export class HomeView extends LitElement {
   static properties = {
     userName: { type: String },
     loginInformationText: { type: String },
@@ -55,7 +58,7 @@ export class LoginView extends LitElement {
           <img src="${loginHeaderIcon}" class="icon" alt="login-icon" />
         </div>
         <h1>${this.loginInformationText}</h1>
-        <input-field label="Name*" type="text"></input-field>
+        <input-field label="Name" type="text"></input-field>
         <button-view
           buttonLabel="${this.buttonName}"
           @click=${() => {
@@ -76,7 +79,17 @@ export class LoginView extends LitElement {
 
   __handleRegister() {
     const userName = this.shadowRoot.querySelector('input-field').value;
+    if (!userName.length) {
+      alert('The name field must not be empty.');
+      return;
+    }
+
+    if (!REGULAR_EXPRESSIONS.test(userName)) {
+      alert('Username should only contain letters and numbers.');
+      return;
+    }
+
     this.dispatchEvent(new CustomEvent('user', { detail: { userName } }));
   }
 }
-window.customElements.define('login-view', LoginView);
+window.customElements.define('home-view', HomeView);
