@@ -96,6 +96,7 @@ export class GameView extends LitElement {
               <div
                 class="game__cell"
                 @click="${() => this._handleCellClick(index)}"
+                @keyup="${() => this._handleCellClick(index)}"
               >
                 <div
                   class="game__mole ${cell ? 'game__mole--show ' : ''}"
@@ -167,7 +168,7 @@ export class GameView extends LitElement {
   _handleCellClick(index) {
     if (this.cells[index]) {
       navigator.vibrate(200);
-      this.score++;
+      this.score += 1;
       this.notificationVisible = true;
 
       setTimeout(() => {
