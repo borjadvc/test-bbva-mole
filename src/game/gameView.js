@@ -1,29 +1,46 @@
 import { html, css, LitElement } from 'lit';
 
 export class GameView extends LitElement {
+  static properties = {
+    score: { type: Number },
+    cells: { type: Array },
+    playing: { type: Boolean },
+    intervalId: { type: Number },
+    buttonName: { type: String },
+  };
+
   static styles = css`
     :host {
       display: block;
       text-align: center;
       --mole-image-url: url('../../../assets/images/mole-image.png');
     }
-
-    .grid {
+    .game,
+    .game--section {
+      display: flex;
+      flex-direction: column;
+      font-size: 1.5em;
+    }
+    .game__score {
+      display: flex;
+      flex-direction: column;
+      text-align: end;
+      align-items: end;
+    }
+    .game__grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       grid-gap: 10px;
       justify-items: center;
     }
-
-    .cell {
+    .game__cell {
       display: inline-block;
       width: 100px;
       height: 100px;
       border: 2px solid black;
       cursor: pointer;
     }
-
-    .mole {
+    .game__mole {
       display: none;
       width: 80px;
       height: 80px;
@@ -32,23 +49,33 @@ export class GameView extends LitElement {
       border-radius: 50%;
       margin: 10px auto;
     }
-
-    .show {
+    .game__mole--show {
       display: block;
     }
+    .game__buttons {
+      margin-top: 0.5em;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .game__notification {
+      position: fixed;
+      bottom: -73px;
+      left: 36px;
+      width: 75%;
+      padding: 10px;
+      background-color: rgba(0, 0, 0, 0.8);
+      color: rgb(255, 255, 255);
+      text-align: center;
+      font-size: 0.75em;
+      display: none;
+    }
 
-    .score {
-      font-size: 24px;
-      margin-top: 20px;
+    .game__notification.visible {
+      display: block;
     }
   `;
-
-  static properties = {
-    score: { type: Number },
-    cells: { type: Array },
-    playing: { type: Boolean },
-    intervalId: { type: Number },
-  };
 
   constructor() {
     super();
@@ -56,34 +83,69 @@ export class GameView extends LitElement {
     this.cells = Array(9).fill(false);
     this.playing = false;
     this.intervalId = null;
+    this.buttonName = 'Play';
   }
 
   render() {
     return html`
-      <div class="grid">
-        ${this.cells.map(
-          (cell, index) => html`
-            <div class="cell" @click="${() => this._handleCellClick(index)}">
-              <div class="mole ${cell ? 'show' : ''}"></div>
-            </div>
-          `
-        )}
-      </div>
-      ${this.playing
-        ? html` <button @click="${this._handleStopClick}">Stop</button> `
-        : html` <button @click="${this._handlePlayClick}">Play</button> `}
-      <div class="score">Score: ${this.score}</div>
+      <section class="game game--section">
+        <div class="game__score"><p>Score: ${this.score}</p></div>
+        <div class="game__grid">
+          ${this.cells.map(
+            (cell, index) => html`
+              <div
+                class="game__cell"
+                @click="${() => this._handleCellClick(index)}"
+              >
+                <div
+                  class="game__mole ${cell ? 'game__mole--show ' : ''}"
+                ></div>
+              </div>
+            `
+          )}
+        </div>
+        <div class="game__buttons">
+          ${this.playing
+            ? html`
+                <button-view
+                  class="game__button-view"
+                  buttonLabel="${this.buttonName}"
+                  @click=${() => {
+                    this._handleStopClick();
+                  }}
+                ></button-view>
+              `
+            : html`
+                <button-view
+                  class="game__button-view"
+                  buttonLabel="${this.buttonName}"
+                  @click=${() => {
+                    this._handlePlayClick();
+                  }}
+                ></button-view>
+              `}
+        </div>
+        <div
+          class="game__notification ${this.notificationVisible
+            ? 'visible'
+            : ''}"
+        >
+          Good Job!
+        </div>
+      </section>
     `;
   }
 
   _handlePlayClick() {
     this.playing = true;
+    this.buttonName = 'Stop';
     this.score = 0;
     this._startGameLoop();
   }
 
   _handleStopClick() {
     this.playing = false;
+    this.buttonName = 'Play';
     this._stopGameLoop();
     this.cells = Array(9).fill(false);
   }
@@ -106,7 +168,11 @@ export class GameView extends LitElement {
     if (this.cells[index]) {
       navigator.vibrate(200);
       this.score++;
-      alert('¡Felicidades! Has golpeado al topo.');
+      this.notificationVisible = true;
+
+      setTimeout(() => {
+        this.notificationVisible = false;
+      }, 2000);
     }
   }
 

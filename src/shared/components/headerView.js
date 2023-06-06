@@ -84,20 +84,6 @@ class HeaderView extends LitElement {
         />
         <p class="header--text">${this.userName}</p>
       </div>
-
-      <div class="header--second-container ">
-        <label for="levels" class="header--level-text ">Level</label>
-
-        <select
-          class="header--second-container--select"
-          name="levels"
-          id="levels"
-        >
-          <option value="low">Low</option>
-          <option value="medium">Medium</option>
-          <option value="high">High</option>
-        </select>
-      </div>
     </nav> `;
   }
 }
