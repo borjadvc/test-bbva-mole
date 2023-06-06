@@ -14,6 +14,7 @@ function initRouter() {
 
   router.setRoutes([
     { path: View.Home.id, component: View.Home.component },
+    { path: View.Game.id, component: View.Game.component },
     { path: '(.*)', redirect: View.Home.id },
   ]);
 
