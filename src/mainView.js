@@ -4,7 +4,7 @@ import './shared/components/headerView.js';
 import './home/homeView.js';
 import './game/gameView.js';
 
-export class HandGameBBVA extends LitElement {
+export class MainView extends LitElement {
   static properties = {
     userName: { type: String },
   };
@@ -71,4 +71,4 @@ export class HandGameBBVA extends LitElement {
     });
   }
 }
-window.customElements.define('hand-game-bbva', HandGameBBVA);
+window.customElements.define('main-view', MainView);
