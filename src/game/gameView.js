@@ -13,7 +13,7 @@ export class GameView extends LitElement {
     :host {
       display: block;
       text-align: center;
-      --mole-image-url: url('../../../assets/images/mole-image.png');
+      --mole-image-url: url('../../assets/images/mole-image.png');
     }
     .game,
     .game--section {

@@ -5,7 +5,7 @@ import '../shared/components/buttonView.js';
 import '../shared/components/inputField.js';
 
 const loginHeaderIcon = new URL(
-  '../../../assets/icons/computer-mouse-solid.svg',
+  '../../assets/icons/computer-mouse-solid.svg',
   import.meta.url
 ).href;
 

@@ -1,4 +1,6 @@
 // import { playwrightLauncher } from '@web/test-runner-playwright';
+import { defaultReporter } from '@web/test-runner';
+import { junitReporter } from '@web/test-runner-junit-reporter';
 
 const filteredLogs = ['Running in dev mode', 'lit-html is in dev mode'];
 
@@ -38,4 +40,17 @@ export default /** @type {import("@web/test-runner").TestRunnerConfig} */ ({
   // ],
 
   // See documentation for all available options
+  coverageConfig: {
+    include: ['src/**/*.js'],
+    exclude: ['src/**/constants/**'],
+  },
+  reporters: [
+    // use the default reporter only for reporting test progress
+    defaultReporter({ reportTestResults: true, reportTestProgress: true }),
+    // use another reporter to report test results
+    junitReporter({
+      outputPath: './coverage/test-results.xml', // default `'./test-results.xml'`
+      reportLogs: true, // default `false`
+    }),
+  ],
 });
