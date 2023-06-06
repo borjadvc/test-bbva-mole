@@ -59,7 +59,6 @@ export class HandGameBBVA extends LitElement {
           this.shadowRoot
             .querySelector('home-view')
             .addEventListener('user', e => {
-              console.log('e');
               this.userName = e.detail.userName;
               headerView.userName = this.userName;
             });
