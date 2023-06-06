@@ -8,6 +8,13 @@ export class GameView extends LitElement {
       --mole-image-url: url('../../../assets/images/mole-image.png');
     }
 
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 10px;
+      justify-items: center;
+    }
+
     .cell {
       display: inline-block;
       width: 100px;
@@ -53,7 +60,7 @@ export class GameView extends LitElement {
 
   render() {
     return html`
-      <div>
+      <div class="grid">
         ${this.cells.map(
           (cell, index) => html`
             <div class="cell" @click="${() => this._handleCellClick(index)}">
