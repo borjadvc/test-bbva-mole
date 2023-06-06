@@ -1,0 +1,11 @@
+{
+    "presets": [
+        "@babel/preset-env",
+        "@babel/preset-typescript"
+      ],
+      "plugins": [
+        "transform-import-meta"
+      ],
+      "ignore": ["node_modules"],
+      "only": ["src/mainView.js"]
+  }
