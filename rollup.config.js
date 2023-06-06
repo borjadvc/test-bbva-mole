@@ -5,6 +5,7 @@ import { importMetaAssets } from '@web/rollup-plugin-import-meta-assets';
 import esbuild from 'rollup-plugin-esbuild';
 import { generateSW } from 'rollup-plugin-workbox';
 import path from 'path';
+import image from 'rollup-plugin-image';
 
 export default {
   input: 'index.html',
@@ -14,6 +15,9 @@ export default {
     assetFileNames: '[hash][extname]',
     format: 'es',
     dir: 'dist',
+    entry: 'src/index.js',
+    dest: 'dist/my-lib.js',
+    plugins: [image()],
   },
   preserveEntrySignatures: false,
 
