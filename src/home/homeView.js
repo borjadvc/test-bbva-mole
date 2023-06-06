@@ -38,6 +38,7 @@ export class HomeView extends LitElement {
       width: 50px;
       height: 50px;
       border-radius: 3rem;
+      margin-bottom: 2em;
     }
     .icon {
       width: 50%;
@@ -51,7 +52,6 @@ export class HomeView extends LitElement {
   constructor() {
     super();
     this.userName = '';
-    this.loginInformationText = 'Create new player';
     this.buttonName = 'join';
   }
 
@@ -61,24 +61,15 @@ export class HomeView extends LitElement {
         <div class="login--icon">
           <img src="${loginHeaderIcon}" class="icon" alt="login-icon" />
         </div>
-        <h1>${this.loginInformationText}</h1>
         <input-field label="Name" type="text"></input-field>
         <button-view
           buttonLabel="${this.buttonName}"
           @click=${() => {
-            this.__goToHomeView(View.Home.id);
+            this.__handleRegister();
           }}
         ></button-view>
       </section>
     `;
-  }
-
-  __goToHomeView(viewId) {
-    if (viewId) {
-      this.__handleRegister();
-      AppRouter.go({ pathname: viewId });
-      this.selectedViewId = AppRouter.getRootPath();
-    }
   }
 
   __handleRegister() {
@@ -94,6 +85,12 @@ export class HomeView extends LitElement {
     }
 
     this.dispatchEvent(new CustomEvent('user', { detail: { userName } }));
+    this.__goToGameView();
+  }
+
+  __goToGameView() {
+    AppRouter.go({ pathname: View.Game.id });
+    this.selectedViewId = AppRouter.getRootPath();
   }
 }
 window.customElements.define('home-view', HomeView);
