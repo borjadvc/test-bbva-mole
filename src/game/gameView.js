@@ -97,6 +97,7 @@ export class GameView extends LitElement {
 
   _handleCellClick(index) {
     if (this.cells[index]) {
+      navigator.vibrate(200);
       this.score++;
       alert('¡Felicidades! Has golpeado al topo.');
     }
