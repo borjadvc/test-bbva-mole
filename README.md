@@ -77,8 +77,6 @@ If you can't wait any longer and want to play it here is the game link!
 
 [Access to live demo 🚀](https://test-bbva-mole.netlify.app/home)
 
-Use the `BLANK_README.md` to get started.
-
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
