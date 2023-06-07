@@ -83,7 +83,11 @@ If you can't wait any longer and want to play it here is the game link!
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
+* First of all you need to install node.js.
+
+[Node.js official page](https://nodejs.org/en)
+
+Type on your shell next line to install npm.
 * npm
 ```sh
 npm install npm@latest -g
