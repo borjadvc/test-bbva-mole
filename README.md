@@ -83,7 +83,7 @@ If you can't wait any longer and want to play it here is the game link!
 
 ### Prerequisites
 
-* First of all you need to install node.js.
+First of all you need to install node.js.
 
 [Node.js official page](https://nodejs.org/en)
 
