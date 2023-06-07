@@ -3,7 +3,7 @@
   "description": "Webcomponent test-bbva-mole following open-wc recommendations",
   "license": "MIT",
   "author": "test-bbva-mole",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
   "main": "index.js",
   "module": "index.js",
