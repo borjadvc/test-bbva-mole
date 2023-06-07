@@ -67,7 +67,7 @@
 ## About The Project
 
 <p align="center">
-  <img width="460" height="300" src="https://s11.gifyu.com/images/SuFEg.gif">
+  <img  src="https://s11.gifyu.com/images/SuFEg.gif">
 </p>
 
 
