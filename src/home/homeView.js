@@ -4,7 +4,7 @@ import { View } from '../shared/constants/views.js';
 import '../shared/components/buttonView.js';
 import '../shared/components/inputField.js';
 
-const loginHeaderIcon = new URL(
+const homeHeaderIcon = new URL(
   '../../assets/icons/computer-mouse-solid.svg',
   import.meta.url
 ).href;
@@ -18,25 +18,21 @@ const ERROR_REGEX_MESSAGE = 'Username should only contain letters and numbers.';
 export class HomeView extends LitElement {
   static properties = {
     userName: { type: String },
-    loginInformationText: { type: String },
     buttonName: { type: String },
   };
 
   static styles = css`
-    h1 {
-      color: white;
+    .home {
+      width: 21.4375rem;
     }
-    .login {
-      width: 343px;
-    }
-    .login--section {
+    .home--section {
       display: flex;
       flex-direction: column;
       align-items: center;
     }
-    .login--icon {
-      width: 50px;
-      height: 50px;
+    .home--icon {
+      width: 3.125rem;
+      height: 3.125rem;
       border-radius: 3rem;
       margin-bottom: 2em;
     }
@@ -57,9 +53,9 @@ export class HomeView extends LitElement {
 
   render() {
     return html`
-      <section class="login login--section">
-        <div class="login--icon">
-          <img src="${loginHeaderIcon}" class="icon" alt="login-icon" />
+      <section class="home home--section">
+        <div class="home--icon">
+          <img src="${homeHeaderIcon}" class="icon" alt="home-icon" />
         </div>
         <input-field label="Name" type="text"></input-field>
         <button-view
@@ -72,6 +68,9 @@ export class HomeView extends LitElement {
     `;
   }
 
+  /**
+   *  Gets the value of the input-field and checks the field then sends you to the Game view
+   */
   __handleRegister() {
     const userName = this.shadowRoot.querySelector('input-field').value;
     if (!userName.length) {
