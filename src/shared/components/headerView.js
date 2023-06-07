@@ -32,11 +32,6 @@ class HeaderView extends LitElement {
       padding: 0 1.875rem;
       font-size: 2rem;
     }
-    .header__level-text {
-      margin: 0;
-      padding: 0 1.875rem;
-      font-size: 1rem;
-    }
     .header__icon {
       height: 2.5rem;
       padding-left: 0.9375rem;
@@ -63,12 +58,12 @@ class HeaderView extends LitElement {
     return html`<nav class="header header--nav">
       <div class="header--container ">
         <img
-          class="header--icon"
+          class="header__icon"
           alt="user-icon"
           src=${userIcon}
           tabindex="0"
         />
-        <p class="header--text">${this.userName}</p>
+        <p class="header__text">${this.userName}</p>
       </div>
     </nav> `;
   }

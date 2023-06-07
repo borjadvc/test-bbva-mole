@@ -1,4 +1,3 @@
-/* eslint-disable lit-a11y/click-events-have-key-events */
 import { LitElement, html, css } from 'lit';
 import { ButtonTypes } from '../constants/helper.js';
 
@@ -13,17 +12,17 @@ class ButtonView extends LitElement {
       display: inline-block;
       position: relative;
       height: fit-content;
-      border-radius: 20px;
+      border-radius: 1.25rem;
     }
 
     .button {
       display: flex;
-      width: 270px;
-      height: 45px;
+      width: 16.875rem;
+      height: 2.8125rem;
       justify-content: center;
       align-items: center;
-      padding: 0px 15px;
-      border-radius: 6px;
+      padding: 0.625em 0.9375em;
+      border-radius: 0.375em;
       cursor: pointer;
       border: none;
     }
