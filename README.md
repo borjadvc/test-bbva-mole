@@ -139,13 +139,13 @@ npm run format
 To execute a single test run:
 
 ```bash
-npm run test
+npm run test:unit
 ```
 
 To run the tests in interactive watch mode run:
 
 ```bash
-npm run test:watch
+npm run test:unit:watch
 ```
 
 
