@@ -2,6 +2,8 @@
 
 This webcomponent follows the [open-wc](https://github.com/open-wc/open-wc) recommendation.
 
+[Access the mole game through this link](https://test-bbva-mole.netlify.app/home)
+
 ## Installation
 
 ```bash
