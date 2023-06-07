@@ -95,6 +95,7 @@ export class TestBBVAMoleView extends LitElement {
     this.playing = false;
     this.intervalId = null;
     this.buttonName = 'Play';
+    this.notificationVisible = false;
   }
 
   disconnectedCallback() {
