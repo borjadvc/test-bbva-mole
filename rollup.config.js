@@ -5,7 +5,7 @@ import { importMetaAssets } from '@web/rollup-plugin-import-meta-assets';
 import esbuild from 'rollup-plugin-esbuild';
 import { generateSW } from 'rollup-plugin-workbox';
 import path from 'path';
-import image from 'rollup-plugin-image';
+import copy from 'rollup-plugin-copy';
 
 export default {
   input: 'index.html',
@@ -15,9 +15,8 @@ export default {
     assetFileNames: '[hash][extname]',
     format: 'es',
     dir: 'dist',
-    entry: 'src/index.js',
+    entry: 'src/mainView.js',
     dest: 'dist/my-lib.js',
-    plugins: [image()],
   },
   preserveEntrySignatures: false,
 
@@ -61,15 +60,19 @@ export default {
     generateSW({
       globIgnores: ['polyfills/*.js', 'nomodule-*.js'],
       navigateFallback: '/index.html',
-      // where to output the generated sw
+      // Where to output the generated sw
       swDest: path.join('dist', 'sw.js'),
       // directory to match patterns against to be precached
       globDirectory: path.join('dist'),
-      // cache any html js and css by default
+      // Cache any html js and css by default
       globPatterns: ['**/*.{html,js,css,webmanifest}'],
       skipWaiting: true,
       clientsClaim: true,
       runtimeCaching: [{ urlPattern: 'polyfills/*.js', handler: 'CacheFirst' }],
+    }),
+    copy({
+      targets: [{ src: 'assets/images/*', dest: './dist/assets/images' }],
+      verbose: true,
     }),
   ],
 };
