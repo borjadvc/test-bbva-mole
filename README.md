@@ -27,9 +27,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  
   <h3 align="center">Test BBVA Mole Game 🎮</h3>
-
   <p align="center">
     Play the famous game to smash the mole! 💥
   </p>
@@ -68,7 +66,10 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-![](https://s11.gifyu.com/images/SuFEg.gif)
+<p align="center">
+  <img width="460" height="300" src="https://s11.gifyu.com/images/SuFEg.gif">
+</p>
+
 
 This project has been done as part of a technical test for BBVA with a lot of love. 💓
 
