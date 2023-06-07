@@ -1,15 +1,15 @@
 {
   "name": "test-bbva-mole",
-  "description": "Webcomponent test-bbva-mole following open-wc recommendations",
+  "description": "Famous game of smash the mole for test in BBVA",
   "license": "MIT",
-  "author": "test-bbva-mole",
+  "author": "borjadvc",
   "version": "0.1.0",
   "type": "module",
-  "main": "index.js",
-  "module": "index.js",
+  "main": "src/mainView.js",
+  "module": "src/mainView.js",
   "exports": {
-    ".": "./index.js",
-    "./test-bbva-mole.js": "./test-bbva-mole.js"
+    ".": "./src/mainView.js",
+    "./test-bbva-mole.js": "./src/mainView.js"
   },
   "scripts": {
     "start": "web-dev-server",
