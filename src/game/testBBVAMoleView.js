@@ -1,6 +1,6 @@
 import { html, css, LitElement } from 'lit';
 
-export class GameView extends LitElement {
+export class TestBBVAMoleView extends LitElement {
   static properties = {
     score: { type: Number },
     cells: { type: Array },
@@ -71,7 +71,18 @@ export class GameView extends LitElement {
       font-size: 0.75em;
       display: none;
     }
-
+    .game__button {
+      display: inline-block;
+      width: 100px;
+      height: 100px;
+      border: 2px solid black;
+      cursor: pointer;
+      background-color: transparent;
+      padding: 0;
+    }
+    .game__mole--hidden {
+      display: none;
+    }
     .game__notification.visible {
       display: block;
     }
@@ -86,6 +97,11 @@ export class GameView extends LitElement {
     this.buttonName = 'Play';
   }
 
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this._stopGameLoop();
+  }
+
   render() {
     return html`
       <section class="game game--section">
@@ -93,15 +109,17 @@ export class GameView extends LitElement {
         <div class="game__grid">
           ${this.cells.map(
             (cell, index) => html`
-              <div
-                class="game__cell"
+              <button
+                class="game__button game__cell"
                 @click="${() => this._handleCellClick(index)}"
                 @keyup="${() => this._handleCellClick(index)}"
               >
                 <div
-                  class="game__mole ${cell ? 'game__mole--show ' : ''}"
+                  class="game__mole ${cell ? 'game__mole--show ' : ''} ${cell
+                    ? ''
+                    : 'game__mole--hidden'}"
                 ></div>
-              </div>
+              </button>
             `
           )}
         </div>
@@ -169,6 +187,7 @@ export class GameView extends LitElement {
     if (this.cells[index]) {
       navigator.vibrate(200);
       this.score += 1;
+      this.cells[index] = false;
       this.notificationVisible = true;
 
       setTimeout(() => {
@@ -176,10 +195,5 @@ export class GameView extends LitElement {
       }, 2000);
     }
   }
-
-  disconnectedCallback() {
-    super.disconnectedCallback();
-    this._stopGameLoop();
-  }
 }
-window.customElements.define('game-view', GameView);
+window.customElements.define('test-bbva-mole-view', TestBBVAMoleView);

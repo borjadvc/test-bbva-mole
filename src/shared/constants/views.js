@@ -10,8 +10,8 @@ const View = {
   },
   Game: {
     id: Route['/game'],
-    title: 'Game',
-    component: 'game-view',
+    title: 'TestBBVAMoleView',
+    component: 'test-bbva-mole-view',
   },
 };
 
