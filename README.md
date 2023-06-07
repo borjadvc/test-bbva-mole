@@ -114,10 +114,10 @@ npm i test-bbva-mole
 
 ```html
 <script type="module">
-  import 'test-bbva-mole/test-bbva-mole.js';
+  import 'src/mainView.js';
 </script>
 
-<test-bbva-mole></test-bbva-mole>
+<main-view></main-view>
 ```
 
 ## Linting and formatting
