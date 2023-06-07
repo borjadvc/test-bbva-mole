@@ -1,6 +1,6 @@
 import { html, css, LitElement } from 'lit';
 
-export class GameView extends LitElement {
+export class TestBBVAMoleView extends LitElement {
   static properties = {
     score: { type: Number },
     cells: { type: Array },
@@ -97,6 +97,11 @@ export class GameView extends LitElement {
     this.buttonName = 'Play';
   }
 
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this._stopGameLoop();
+  }
+
   render() {
     return html`
       <section class="game game--section">
@@ -190,10 +195,5 @@ export class GameView extends LitElement {
       }, 2000);
     }
   }
-
-  disconnectedCallback() {
-    super.disconnectedCallback();
-    this._stopGameLoop();
-  }
 }
-window.customElements.define('game-view', GameView);
+window.customElements.define('test-bbva-mole-view', TestBBVAMoleView);

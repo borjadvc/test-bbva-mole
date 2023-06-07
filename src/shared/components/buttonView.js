@@ -24,6 +24,8 @@ class ButtonView extends LitElement {
       align-items: center;
       padding: 0px 15px;
       border-radius: 6px;
+      cursor: pointer;
+      border: none;
     }
 
     .button--view {
@@ -46,11 +48,12 @@ class ButtonView extends LitElement {
   }
 
   render() {
-    return html`<span
+    return html`<button
       class="button button--view ${this.getButtonClass()}"
       @click=${this.emitClick}
-      >${this.buttonLabel}</span
-    >`;
+    >
+      ${this.buttonLabel}
+    </button>`;
   }
 }
 

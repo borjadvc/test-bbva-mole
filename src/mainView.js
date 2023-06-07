@@ -2,7 +2,7 @@ import { html, css, LitElement } from 'lit';
 import { AppRouter } from './shared/helpers/router.js';
 import './shared/components/headerView.js';
 import './home/homeView.js';
-import './game/gameView.js';
+import './game/testBBVAMoleView.js';
 
 export class MainView extends LitElement {
   static properties = {
@@ -51,7 +51,7 @@ export class MainView extends LitElement {
         const addedNode = mutation.addedNodes[0];
         if (
           addedNode instanceof HTMLElement &&
-          addedNode instanceof customElements.get('game-view')
+          addedNode instanceof customElements.get('test-bbva-mole-view')
         ) {
           headerView.style.display = 'block';
         } else if (addedNode instanceof customElements.get('home-view')) {
