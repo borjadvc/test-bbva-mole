@@ -20,49 +20,30 @@ class HeaderView extends LitElement {
       background-color: #1262a8;
       color: white;
     }
-    .header--first-container {
+    .header--container {
       display: flex;
       flex: 1;
-      align-items: start;
-      justify-content: start;
+      align-items: flex-start;
+      justify-content: flex-start;
       font-size: 1.5rem;
     }
-    .header--second-container {
-      display: flex;
-      flex: 1;
-      align-items: end;
-      justify-content: end;
-      padding: 0 30px;
-      font-size: 1.5rem;
-    }
-    .header--second-container--select {
-      background-color: #1262a8;
-      border: none;
-      color: white;
-      font-size: 1.65rem;
-    }
-    .header--text {
+    .header__text {
       margin: 0;
-      padding: 0 30px;
+      padding: 0 1.875rem;
       font-size: 2rem;
     }
-    .header--level-text {
-      margin: 0;
-      padding: 0 30px;
-      font-size: 1rem;
-    }
-    .header--icon {
-      height: 40px;
-      padding-left: 15px;
+    .header__icon {
+      height: 2.5rem;
+      padding-left: 0.9375rem;
       filter: invert(100%) sepia(0%) saturate(7500%) hue-rotate(48deg)
         brightness(107%) contrast(105%);
     }
 
-    @media (min-width: 768px) {
+    @media (max-width: 768px) {
       .header {
         height: 4.25rem;
       }
-      .header--text {
+      .header__text {
         font-size: 2rem;
       }
     }
@@ -75,14 +56,14 @@ class HeaderView extends LitElement {
 
   render() {
     return html`<nav class="header header--nav">
-      <div class="header--first-container ">
+      <div class="header--container ">
         <img
-          class="header--icon"
+          class="header__icon"
           alt="user-icon"
           src=${userIcon}
           tabindex="0"
         />
-        <p class="header--text">${this.userName}</p>
+        <p class="header__text">${this.userName}</p>
       </div>
     </nav> `;
   }
