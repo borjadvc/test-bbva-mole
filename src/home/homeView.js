@@ -3,8 +3,9 @@ import { AppRouter } from '../shared/helpers/router.js';
 import { View } from '../shared/constants/views.js';
 import '../shared/components/buttonView.js';
 import '../shared/components/inputField.js';
+import '../shared/components/toastView.js';
 
-const loginHeaderIcon = new URL(
+const homeHeaderIcon = new URL(
   '../../assets/icons/computer-mouse-solid.svg',
   import.meta.url
 ).href;
@@ -18,25 +19,25 @@ const ERROR_REGEX_MESSAGE = 'Username should only contain letters and numbers.';
 export class HomeView extends LitElement {
   static properties = {
     userName: { type: String },
-    loginInformationText: { type: String },
     buttonName: { type: String },
+    showToast: { type: Boolean },
+    toastMessage: { type: String },
+    toastType: { type: String },
+    toastTimeout: { type: Number },
   };
 
   static styles = css`
-    h1 {
-      color: white;
+    .home {
+      width: 21.4375rem;
     }
-    .login {
-      width: 343px;
-    }
-    .login--section {
+    .home--section {
       display: flex;
       flex-direction: column;
       align-items: center;
     }
-    .login--icon {
-      width: 50px;
-      height: 50px;
+    .home--icon {
+      width: 3.125rem;
+      height: 3.125rem;
       border-radius: 3rem;
       margin-bottom: 2em;
     }
@@ -53,13 +54,17 @@ export class HomeView extends LitElement {
     super();
     this.userName = '';
     this.buttonName = 'join';
+    this.showToast = false;
+    this.toastMessage = '';
+    this.toastType = '';
+    this.toastTimeout = null;
   }
 
   render() {
     return html`
-      <section class="login login--section">
-        <div class="login--icon">
-          <img src="${loginHeaderIcon}" class="icon" alt="login-icon" />
+      <section class="home home--section">
+        <div class="home--icon">
+          <img src="${homeHeaderIcon}" class="icon" alt="home-icon" />
         </div>
         <input-field label="Name" type="text"></input-field>
         <button-view
@@ -69,18 +74,29 @@ export class HomeView extends LitElement {
           }}
         ></button-view>
       </section>
+      <toast-view
+        .show=${this.showToast}
+        .message=${this.toastMessage}
+        .type=${this.toastType}
+      ></toast-view>
     `;
   }
 
   __handleRegister() {
     const userName = this.shadowRoot.querySelector('input-field').value;
     if (!userName.length) {
-      alert(ERROR_EMPTY_FIELD_MESSAGE);
+      this.showToast = true;
+      this.toastMessage = ERROR_EMPTY_FIELD_MESSAGE;
+      this.toastType = 'error';
+      this._startToastTimer();
       return;
     }
 
     if (!REGULAR_EXPRESSIONS.test(userName)) {
-      alert(ERROR_REGEX_MESSAGE);
+      this.showToast = true;
+      this.toastMessage = ERROR_REGEX_MESSAGE;
+      this.toastType = 'error';
+      this._startToastTimer();
       return;
     }
 
@@ -92,5 +108,18 @@ export class HomeView extends LitElement {
     AppRouter.go({ pathname: View.Game.id });
     this.selectedViewId = AppRouter.getRootPath();
   }
+
+  _startToastTimer() {
+    if (this.toastTimeout) {
+      clearTimeout(this.toastTimeout);
+    }
+    this.toastTimeout = setTimeout(() => {
+      this.showToast = false;
+      this.toastMessage = '';
+      this.toastType = '';
+      this.toastTimeout = null;
+    }, 3000);
+  }
 }
+
 window.customElements.define('home-view', HomeView);
