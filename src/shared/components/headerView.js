@@ -39,7 +39,7 @@ class HeaderView extends LitElement {
         brightness(107%) contrast(105%);
     }
 
-    @media (min-width: 48em) {
+    @media (max-width: 768px) {
       .header {
         height: 4.25rem;
       }

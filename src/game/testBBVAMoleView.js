@@ -1,4 +1,5 @@
 import { html, css, LitElement } from 'lit';
+import '../shared/components/toastView.js';
 
 export class TestBBVAMoleView extends LitElement {
   static properties = {
@@ -7,6 +8,10 @@ export class TestBBVAMoleView extends LitElement {
     playing: { type: Boolean },
     intervalId: { type: Number },
     buttonName: { type: String },
+    showToast: { type: Boolean },
+    toastMessage: { type: String },
+    toastType: { type: String },
+    toastTimeout: { type: Number },
   };
 
   static styles = css`
@@ -30,24 +35,24 @@ export class TestBBVAMoleView extends LitElement {
     .game__grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      grid-gap: 10px;
+      grid-gap: 1rem;
       justify-items: center;
     }
     .game__cell {
       display: inline-block;
-      width: 100px;
-      height: 100px;
-      border: 2px solid black;
+      width: 8rem;
+      height: 8rem;
+      border: 0.2rem solid black;
       cursor: pointer;
     }
     .game__mole {
       display: none;
-      width: 80px;
-      height: 80px;
+      width: 6.4rem;
+      height: 6.4rem;
       background-image: var(--mole-image-url);
       background-size: cover;
       border-radius: 50%;
-      margin: 10px auto;
+      margin: 1rem auto;
     }
     .game__mole--show {
       display: block;
@@ -59,23 +64,11 @@ export class TestBBVAMoleView extends LitElement {
       align-items: center;
       text-align: center;
     }
-    .game__notification {
-      position: fixed;
-      bottom: -73px;
-      left: 36px;
-      width: 75%;
-      padding: 10px;
-      background-color: rgba(0, 0, 0, 0.8);
-      color: rgb(255, 255, 255);
-      text-align: center;
-      font-size: 0.75em;
-      display: none;
-    }
     .game__button {
       display: inline-block;
-      width: 100px;
-      height: 100px;
-      border: 2px solid black;
+      width: 8rem;
+      height: 8rem;
+      border: 0.2rem solid black;
       cursor: pointer;
       background-color: transparent;
       padding: 0;
@@ -83,8 +76,22 @@ export class TestBBVAMoleView extends LitElement {
     .game__mole--hidden {
       display: none;
     }
-    .game__notification.visible {
-      display: block;
+
+    @media (max-width: 768px) {
+      .game__cell {
+        width: 6rem;
+        height: 6rem;
+      }
+      .game__buttons {
+        margin-top: 1em;
+      }
+      .game__mole {
+        width: 4.3rem;
+        height: 4.3rem;
+      }
+      p {
+        margin: 0.5rem;
+      }
     }
   `;
 
@@ -96,11 +103,15 @@ export class TestBBVAMoleView extends LitElement {
     this.intervalId = null;
     this.buttonName = 'Play';
     this.notificationVisible = false;
+    this.showToast = false;
+    this.toastMessage = '';
+    this.toastType = '';
+    this.toastTimeout = null;
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
-    this._stopGameLoop();
+    this.__stopGameLoop();
   }
 
   render() {
@@ -112,8 +123,8 @@ export class TestBBVAMoleView extends LitElement {
             (cell, index) => html`
               <button
                 class="game__button game__cell"
-                @click="${() => this._handleCellClick(index)}"
-                @keyup="${() => this._handleCellClick(index)}"
+                @click="${() => this.__handleCellClick(index)}"
+                @keyup="${() => this.__handleCellClick(index)}"
               >
                 <div
                   class="game__mole ${cell ? 'game__mole--show ' : ''} ${cell
@@ -131,7 +142,7 @@ export class TestBBVAMoleView extends LitElement {
                   class="game__button-view"
                   buttonLabel="${this.buttonName}"
                   @click=${() => {
-                    this._handleStopClick();
+                    this.__handleStopClick();
                   }}
                 ></button-view>
               `
@@ -140,61 +151,70 @@ export class TestBBVAMoleView extends LitElement {
                   class="game__button-view"
                   buttonLabel="${this.buttonName}"
                   @click=${() => {
-                    this._handlePlayClick();
+                    this.__handlePlayClick();
                   }}
                 ></button-view>
               `}
         </div>
-        <div
-          class="game__notification ${this.notificationVisible
-            ? 'visible'
-            : ''}"
-        >
-          Good Job!
-        </div>
       </section>
+      <toast-view
+        .show=${this.showToast}
+        .message=${this.toastMessage}
+        .type=${this.toastType}
+      ></toast-view>
     `;
   }
 
-  _handlePlayClick() {
+  __handlePlayClick() {
     this.playing = true;
     this.buttonName = 'Stop';
     this.score = 0;
-    this._startGameLoop();
+    this.__startGameLoop();
   }
 
-  _handleStopClick() {
+  __handleStopClick() {
     this.playing = false;
     this.buttonName = 'Play';
-    this._stopGameLoop();
+    this.__stopGameLoop();
     this.cells = Array(9).fill(false);
   }
 
-  _startGameLoop() {
+  __startGameLoop() {
     this.intervalId = setInterval(() => {
-      this._showRandomMole();
+      this.__showRandomMole();
     }, 1000);
   }
 
-  _stopGameLoop() {
+  __stopGameLoop() {
     clearInterval(this.intervalId);
   }
 
-  _showRandomMole() {
+  __showRandomMole() {
     this.cells = this.cells.map(() => Math.random() < 0.5);
   }
 
-  _handleCellClick(index) {
+  __handleCellClick(index) {
     if (this.cells[index]) {
       navigator.vibrate(200);
       this.score += 1;
       this.cells[index] = false;
-      this.notificationVisible = true;
-
-      setTimeout(() => {
-        this.notificationVisible = false;
-      }, 2000);
+      this.showToast = true;
+      this.toastMessage = 'Good Job!';
+      this.toastType = 'success';
+      this.__startToastTimer();
     }
+  }
+
+  __startToastTimer() {
+    if (this.toastTimeout) {
+      clearTimeout(this.toastTimeout);
+    }
+    this.toastTimeout = setTimeout(() => {
+      this.showToast = false;
+      this.toastMessage = '';
+      this.toastType = '';
+      this.toastTimeout = null;
+    }, 3000);
   }
 }
 window.customElements.define('test-bbva-mole-view', TestBBVAMoleView);

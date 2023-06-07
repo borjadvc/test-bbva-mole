@@ -3,6 +3,7 @@ import { AppRouter } from '../shared/helpers/router.js';
 import { View } from '../shared/constants/views.js';
 import '../shared/components/buttonView.js';
 import '../shared/components/inputField.js';
+import '../shared/components/toastView.js';
 
 const homeHeaderIcon = new URL(
   '../../assets/icons/computer-mouse-solid.svg',
@@ -19,6 +20,10 @@ export class HomeView extends LitElement {
   static properties = {
     userName: { type: String },
     buttonName: { type: String },
+    showToast: { type: Boolean },
+    toastMessage: { type: String },
+    toastType: { type: String },
+    toastTimeout: { type: Number },
   };
 
   static styles = css`
@@ -49,6 +54,10 @@ export class HomeView extends LitElement {
     super();
     this.userName = '';
     this.buttonName = 'join';
+    this.showToast = false;
+    this.toastMessage = '';
+    this.toastType = '';
+    this.toastTimeout = null;
   }
 
   render() {
@@ -65,21 +74,29 @@ export class HomeView extends LitElement {
           }}
         ></button-view>
       </section>
+      <toast-view
+        .show=${this.showToast}
+        .message=${this.toastMessage}
+        .type=${this.toastType}
+      ></toast-view>
     `;
   }
 
-  /**
-   *  Gets the value of the input-field and checks the field then sends you to the Game view
-   */
   __handleRegister() {
     const userName = this.shadowRoot.querySelector('input-field').value;
     if (!userName.length) {
-      alert(ERROR_EMPTY_FIELD_MESSAGE);
+      this.showToast = true;
+      this.toastMessage = ERROR_EMPTY_FIELD_MESSAGE;
+      this.toastType = 'error';
+      this._startToastTimer();
       return;
     }
 
     if (!REGULAR_EXPRESSIONS.test(userName)) {
-      alert(ERROR_REGEX_MESSAGE);
+      this.showToast = true;
+      this.toastMessage = ERROR_REGEX_MESSAGE;
+      this.toastType = 'error';
+      this._startToastTimer();
       return;
     }
 
@@ -91,5 +108,18 @@ export class HomeView extends LitElement {
     AppRouter.go({ pathname: View.Game.id });
     this.selectedViewId = AppRouter.getRootPath();
   }
+
+  _startToastTimer() {
+    if (this.toastTimeout) {
+      clearTimeout(this.toastTimeout);
+    }
+    this.toastTimeout = setTimeout(() => {
+      this.showToast = false;
+      this.toastMessage = '';
+      this.toastType = '';
+      this.toastTimeout = null;
+    }, 3000);
+  }
 }
+
 window.customElements.define('home-view', HomeView);
