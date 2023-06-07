@@ -20,9 +20,9 @@
 -->
 
 [![MIT License][license-shield]][license-url]
-[!JavaScript][javascript-shield]][javascript-url]
-[!HTML5][html-shield]][html-url]
-[!CSS3][css-shield]][css-url]
+[![JavaScript][javascript-shield]][javascript-url]
+[![HTML5][html-shield]][html-url]
+[![CSS3][css-shield]][css-url]
 
 <!-- PROJECT LOGO -->
 <br />
