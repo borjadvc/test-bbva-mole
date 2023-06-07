@@ -20,9 +20,9 @@
 -->
 
 [![MIT License][license-shield]][license-url]
-![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
-![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
-![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
+[!JavaScript][javascript-shield]][javascript-url]
+[!HTML5][html-shield]][html-url]
+[!CSS3][css-shield]][css-url]
 
 <!-- PROJECT LOGO -->
 <br />
@@ -206,4 +206,9 @@ Project Link: [https://github.com/borjadvc/test-bbva-mole](https://github.com/bo
 [issues-url]: https://github.com/othneildrew/Best-README-Template/issues
 [license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
 [license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
-
+[javascript-shield]: https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E
+[javascript-url]: https://developer.mozilla.org/es/docs/Web/JavaScript
+[html-shield]: https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white
+[html-url]: https://developer.mozilla.org/es/docs/Web/HTML
+[css-shield]: https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white
+[css-url]: https://developer.mozilla.org/es/docs/Web/CSS
