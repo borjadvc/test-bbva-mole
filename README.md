@@ -41,9 +41,6 @@
   <ol>
     <li>
       <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
     </li>
     <li>
       <a href="#getting-started">Getting Started</a>
@@ -76,18 +73,6 @@ This project has been done as part of a technical test for BBVA with a lot of lo
 If you can't wait any longer and want to play it here is the game link!
 
 [Access to live demo 🚀](https://test-bbva-mole.netlify.app/home)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-### Built With
-
-This section list libraries used to create this project.
-
-* [![JavaScript][javascript-shield]][javascript-url]
-* [![HTML5][html-shield]][html-url]
-* [![CSS3][css-shield]][css-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
