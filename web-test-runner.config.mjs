@@ -1,4 +1,4 @@
-// import { playwrightLauncher } from '@web/test-runner-playwright';
+import { playwrightLauncher } from '@web/test-runner-playwright';
 import { defaultReporter } from '@web/test-runner';
 import { junitReporter } from '@web/test-runner-junit-reporter';
 
@@ -33,11 +33,11 @@ export default /** @type {import("@web/test-runner").TestRunnerConfig} */ ({
   // concurrency: 1,
 
   /** Browsers to run tests on */
-  // browsers: [
-  //   playwrightLauncher({ product: 'chromium' }),
-  //   playwrightLauncher({ product: 'firefox' }),
-  //   playwrightLauncher({ product: 'webkit' }),
-  // ],
+  browsers: [
+    // playwrightLauncher({ product: 'chromium' }),
+    //  playwrightLauncher({ product: 'firefox' }),
+    playwrightLauncher({ product: 'webkit' }),
+  ],
 
   // See documentation for all available options
   coverageConfig: {
