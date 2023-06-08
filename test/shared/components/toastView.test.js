@@ -1,5 +1,5 @@
 import { html } from 'lit';
-import { fixture, expect, waitUntil, nextFrame } from '@open-wc/testing';
+import { fixture, expect, waitUntil } from '@open-wc/testing';
 import '../../../src/shared/components/toastView.js';
 import sinon from 'sinon';
 

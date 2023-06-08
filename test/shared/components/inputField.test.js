@@ -2,7 +2,7 @@ import { fixture, expect } from '@open-wc/testing';
 import { html } from 'lit';
 import '../../../src/shared/components/inputField.js';
 
-describe('InputField', () => {
+describe('TestBBVAMole - Components - InputField', () => {
   it('renders an input field with the provided label', async () => {
     const label = 'Username';
     const el = await fixture(
