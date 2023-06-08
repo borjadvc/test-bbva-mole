@@ -85,4 +85,4 @@ class ToastView extends LitElement {
   }
 }
 
-window.customElements.define('toast-view', ToastView);
+customElements.define('toast-view', ToastView);
