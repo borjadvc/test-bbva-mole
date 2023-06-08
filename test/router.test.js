@@ -1,16 +1,22 @@
-import { html } from 'lit';
-import { fixture, expect } from '@open-wc/testing';
-import { View } from '../src/shared/constants/views.js';
-import '../src/index.js';
-import '../src/login/view/loginView.js';
+import { expect, fixture } from '@open-wc/testing';
+import { AppRouter } from '../src/shared/helpers/router.js';
+import '../src/mainView.js';
 
-describe('HandGame - Router checking', () => {
-  it('should renders login view', async () => {
-    const element = await fixture(html`<hand-game-bbva></hand-game-bbva>`);
+describe('TestBBVAMole - Helpers - Router', () => {
+  let router;
+  let mainView;
 
-    const routerOutletContainer =
-      element.shadowRoot.querySelector('#router-outlet');
-    expect(routerOutletContainer).to.exist;
-    expect(View.Login.component).to.exist;
+  beforeEach(async () => {
+    mainView = await fixture('<main-view></main-view>');
+    router = AppRouter.getRouter.call(mainView);
+  });
+
+  it('should initialize the router correctly', () => {
+    expect(router).to.exist;
+  });
+
+  it('should return the current location', () => {
+    const location = AppRouter.getLocation.call(mainView);
+    expect(location).to.exist;
   });
 });
