@@ -2,7 +2,7 @@ import { expect, fixture } from '@open-wc/testing';
 import { AppRouter } from '../src/shared/helpers/router.js';
 import '../src/mainView.js';
 
-describe('AppRouter', () => {
+describe('TestBBVAMole - Helpers - Router', () => {
   let router;
   let mainView;
 
