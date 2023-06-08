@@ -1,6 +1,5 @@
 import { expect, fixture } from '@open-wc/testing';
 import { AppRouter } from '../src/shared/helpers/router.js';
-import { Route } from '../src/shared/constants/views.js';
 import '../src/mainView.js';
 
 describe('AppRouter', () => {
